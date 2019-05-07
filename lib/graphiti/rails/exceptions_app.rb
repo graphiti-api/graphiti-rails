@@ -19,8 +19,8 @@ module Graphiti
         if content_type == :jsonapi
           exception_klass = context&.graphiti_exception_handler_for(exception) || GraphitiErrors::ExceptionHandler.new
 
-          # TODO: Do we actually want to log?
-          exception_klass.log(exception)
+          # Log fatal exceptions only
+          exception_klass.log(exception) if exception_klass.fatal?(exception)
 
           payload = exception_klass.error_payload(exception)
           status = exception_klass.status_code(exception)

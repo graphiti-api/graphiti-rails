@@ -8,9 +8,11 @@ module Graphiti
       end
 
       def detail(error)
-        if status_code(error) >= 500
-          default_detail
-        end
+        default_detail if fatal?(error)
+      end
+
+      def fatal?(error)
+        status_code(error) >= 500
       end
     end
   end
