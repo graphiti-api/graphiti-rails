@@ -15,12 +15,9 @@ module Graphiti
         exception = request.get_header "action_dispatch.exception"
 
         if Graphiti::Rails.render_exception_for_format?(content_type)
-          status, payload = Graphiti::Rails.exception_details(exception)
-          body = payload.to_json
+          status, format, body = Graphiti::Rails.rendered_exception(exception, content_type: content_type)
 
-          # TODO: Do we need to log here?
-
-          [status, { "Content-Type" => "#{content_type}; charset=#{ActionDispatch::Response.default_charset}",
+          [status, { "Content-Type" => "#{format}; charset=#{ActionDispatch::Response.default_charset}",
             "Content-Length" => body.bytesize.to_s }, [body]]
         else
           @app.call(env)

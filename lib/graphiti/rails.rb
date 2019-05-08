@@ -49,6 +49,22 @@ module Graphiti
       payload = exception_klass.error_payload(exception)
       [status, payload]
     end
+
+    def self.rendered_exception(exception, content_type:, **keywords)
+      status, body = exception_details(exception, **keywords)
+
+      to_format = (content_type == :jsonapi) ? "to_json" : "to_#{content_type.to_sym}"
+
+      if content_type && body.respond_to?(to_format)
+        formatted_body = body.public_send(to_format)
+        format = content_type
+      else
+        formatted_body = body.to_json
+        format = Mime[:json]
+      end
+
+      [status, format, formatted_body]
+    end
   end
 end
 

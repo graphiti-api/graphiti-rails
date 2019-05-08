@@ -31,8 +31,8 @@ ActionDispatch::DebugExceptions.class_eval do
   alias_method :render_for_api_request_without_graphiti, :render_for_api_request
   def render_for_api_request(content_type, wrapper)
     if Graphiti::Rails.render_exception_for_format?(content_type)
-      status, payload = Graphiti::Rails.exception_details(wrapper.exception, show_raw_error: true)
-      render(status, payload.to_json, content_type)
+      status, format, body = Graphiti::Rails.rendered_exception(wrapper.exception, content_type: content_type, show_raw_error: true)
+      render(status, body, format)
     else
       render_for_api_request_without_graphiti(content_type, wrapper)
     end
