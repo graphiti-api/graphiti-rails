@@ -8,47 +8,17 @@ module Graphiti
       config.graphiti.handled_exception_formats = [:jsonapi]
 
       config.action_dispatch.rescue_responses.merge!(
-        # Graphiti::Errors::AdapterNotImplemented,
-        # Graphiti::Errors::SideloadConfig,
-        # Graphiti::Errors::Remote,
-        # Graphiti::Errors::AroundCallbackProc,
-        # Graphiti::Errors::RemoteWrite,
-        # Graphiti::Errors::UnsupportedOperator,
-        # Graphiti::Errors::UnwritableRelationship,
-        # Graphiti::Errors::SingularSideload,
-        # Graphiti::Errors::UnsupportedSort,
-        # Graphiti::Errors::ExtraAttributeNotFound,
-        # Graphiti::Errors::InvalidFilterValue,
-        # Graphiti::Errors::MissingEnumAllowList,
-        # Graphiti::Errors::InvalidLink,
-        # Graphiti::Errors::SingularFilter,
-        # Graphiti::Errors::Unlinkable,
-        # Graphiti::Errors::SideloadParamsError,
-        # Graphiti::Errors::SideloadQueryBuildingError,
-        # Graphiti::Errors::SideloadAssignError,
-        # Graphiti::Errors::AttributeError,
-        # Graphiti::Errors::InvalidJSONArray,
-        # Graphiti::Errors::InvalidEndpoint,
-        # Graphiti::Errors::InvalidType,
-        # Graphiti::Errors::ResourceEndpointConflict,
-        # Graphiti::Errors::PolymorphicResourceChildNotFound,
-        # Graphiti::Errors::ValidationError,
-        # Graphiti::Errors::ImplicitFilterTypeMissing,
-        # Graphiti::Errors::ImplicitSortTypeMissing,
-        # Graphiti::Errors::TypecastFailed,
-        # Graphiti::Errors::ModelNotFound,
-        # Graphiti::Errors::TypeNotFound,
-        # Graphiti::Errors::PolymorphicSideloadTypeNotFound,
-        # Graphiti::Errors::PolymorphicSideloadChildNotFound,
-        # Graphiti::Errors::MissingSideloadFilter,
-        # Graphiti::Errors::MissingDependentFilter,
-        # Graphiti::Errors::ResourceNotFound
-        # Graphiti::Errors::UnsupportedPagination,
-        # Graphiti::Errors::UnsupportedPageSize,
-        # Graphiti::Errors::InvalidInclude,
-        # Graphiti::Errors::StatNotFound,
-        "Graphiti::Errors::RecordNotFound" => :not_found
-        # Graphiti::Errors::RequiredFilter
+        # There are many other Graphiti Errors but we are assuming they'll be rolled up into InvalidRequest or are 5xx errors
+        "Graphiti::Errors::InvalidRequest" => :bad_request,
+        "Graphiti::Errors::RecordNotFound" => :not_found,
+
+        # TODO: Settle on :forbidden vs :bad_request here
+        # https://github.com/wagenet/graphiti-rails/issues/17
+        "Graphiti::Errors::RemoteWrite" => :forbidden # Or maybe :bad_request
+
+        # TODO: We may want to include this if it ends up not being easily rolled up into InvalidRequest
+        # https://github.com/wagenet/graphiti-rails/issues/16
+        # "Graphiti::Errors::SingularSideload" => :bad_request,
       )
 
       initializer "graphiti-rails.action_controller" do |app|
