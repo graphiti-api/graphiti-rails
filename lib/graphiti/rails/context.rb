@@ -1,21 +1,31 @@
 module Graphiti
   module Rails
+    # Wraps controller actions in a [Graphiti Context](https://www.graphiti.dev/guides/concepts/resources#context) which points to the
+    # controller instance by default.
     module Context
       def self.included(klass)
         klass.class_eval do
-          # QUESTION: Any downside to including this in all Rails controllers?
           include Graphiti::Context
           around_action :wrap_graphiti_context
         end
       end
 
-      # QUESTION: Is it fine if we wrap even non-Graphiti actions?
+      # Called by [`#around_action`](https://api.rubyonrails.org/classes/AbstractController/Callbacks/ClassMethods.html#method-i-around_action)
+      # to wrap the current action in a Graphiti context defined by {#graphiti_context}.
       def wrap_graphiti_context
-        Graphiti.with_context(jsonapi_context, action_name.to_sym) do
+        Graphiti.with_context(graphiti_context, action_name.to_sym) do
           yield
         end
       end
 
+      # The context to use for Graphiti Resources. Defaults to the controller instance.
+      # Can be redefined for different behavior.
+      def graphiti_context
+        jsonapi_context
+      end
+
+      # @private
+      # @deprecated Use {#graphiti_context} instead
       def jsonapi_context
         self
       end

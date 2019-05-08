@@ -34,4 +34,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "kaminari"
   spec.add_development_dependency "factory_bot"
   spec.add_development_dependency "responders"
+  spec.add_development_dependency "yard"
+  spec.add_development_dependency "kramdown-parser-gfm"
+  spec.add_development_dependency "rouge"
 end

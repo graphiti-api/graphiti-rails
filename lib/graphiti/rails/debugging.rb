@@ -1,12 +1,13 @@
 module Graphiti
   module Rails
+    # Wraps controller actions in a [Graphiti Debugger](https://www.graphiti.dev/guides/concepts/debugging#debugger).
     module Debugging
       def self.included(klass)
-        # QUESTION: Do we always want this enabled, even in production?
         klass.around_action :debug_graphiti
       end
 
-      # QUESTION: Is it fine if we wrap even non-Graphiti actions?
+      # Called by [`#around_action`](https://api.rubyonrails.org/classes/AbstractController/Callbacks/ClassMethods.html#method-i-around_action)
+      # to wrap the current action in a Graphiti Debugger.
       def debug_graphiti
         Debugger.debug do
           yield

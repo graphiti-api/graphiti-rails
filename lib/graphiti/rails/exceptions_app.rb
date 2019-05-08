@@ -1,9 +1,8 @@
 module Graphiti
   module Rails
-    # Similar function to GraphitiErrors#handle_exceptions but more Railsy
-    #
-    # This Rack app looks for JSON API requests then renders them in a more correct format.
-    # Other exceptions are passed on to the app specified in the Rails app's `config.exceptions_app`.
+    # This Rack app looks for content types that should be handled with a GraphitiErrors::ExceptionHanlder
+    # and renders them accordingly. Other exceptions are passed on to the app specified in the Rails app's
+    # `config.exceptions_app`.
     class ExceptionsApp
       def initialize(app)
         @app = app

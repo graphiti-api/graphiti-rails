@@ -1,4 +1,6 @@
 .bundle/
+.yardoc/
+doc/
 log/*.log
 pkg/
 spec/.rspec-examples.txt

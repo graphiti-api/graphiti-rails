@@ -1,0 +1,4 @@
+--no-private
+--load .yardext.rb
+--markup-provider=kramdown-parser-gfm
+--markup=markdown
