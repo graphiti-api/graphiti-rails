@@ -9,21 +9,21 @@ Gem::Specification.new do |spec|
   spec.version     = Graphiti::Rails::VERSION
   spec.authors     = ["Peter Wagenet"]
   spec.email       = ["peter.wagenet@gmail.com"]
-  spec.homepage    = "" #"TODO"
-  spec.summary     = "" #"TODO: Summary of Graphiti::Rails."
-  spec.description = "" #"TODO: Description of Graphiti::Rails."
+  spec.homepage    = "https://www.graphiti.dev"
+  spec.summary     = "Rails integration for Graphiti"
+  # spec.description = "TODO: Description of Graphiti::Rails."
   spec.license     = "MIT"
 
-  # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
-  # to allow pushing to a single host or delete this section to allow pushing to any host.
-  if spec.respond_to?(:metadata)
-    spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
-  else
-    raise "RubyGems 2.0 or newer is required to protect against " \
-      "public gem pushes."
-  end
+  spec.metadata = {
+    "bug_tracker_uri"   => "https://github.com/wagenet/graphiti-rails/issues",
+    "changelog_uri"     => "https://github.com/wagenet/graphiti-rails/CHANGELOG.md",
+    "source_code_uri"   => "https://github.com/wagenet/graphiti-rails"
+    # "documentation_uri" => "https://www.example.info/gems/bestgemever/0.0.1",
+    # "mailing_list_uri"  => "https://groups.example.com/bestgemever",
+    # "wiki_uri"          => "https://example.com/user/bestgemever/wiki"
+  }
 
-  spec.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
+  spec.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md", "CHANGELOG.md"]
 
   spec.add_dependency "graphiti", "~> 1.0.3"
   spec.add_dependency "rails", ">= 5.0"
