@@ -17,7 +17,7 @@ RSpec.describe "debugging exceptions", type: :request do
 
       it "renders details for an invalid request error" do
         pending "This will be in the next Graphiti release"
-        fail
+        fail "not implemented"
       end
 
       it "renders details for a non-graphiti error" do
