@@ -3,6 +3,10 @@
 module Graphiti
   module Rails
     class Railtie < ::Rails::Railtie
+      config.graphiti = ActiveSupport::OrderedOptions.new
+
+      config.graphiti.handled_exception_formats = [:jsonapi]
+
       config.action_dispatch.rescue_responses.merge!(
         # Graphiti::Errors::AdapterNotImplemented,
         # Graphiti::Errors::SideloadConfig,
@@ -43,9 +47,13 @@ module Graphiti
         # Graphiti::Errors::UnsupportedPageSize,
         # Graphiti::Errors::InvalidInclude,
         # Graphiti::Errors::StatNotFound,
-        Graphiti::Errors::RecordNotFound => 404
+        "Graphiti::Errors::RecordNotFound" => :not_found
         # Graphiti::Errors::RequiredFilter
       )
+
+      initializer "graphiti-rails.action_controller" do |app|
+        Graphiti::Rails.handled_exception_formats = app.config.graphiti.handled_exception_formats
+      end
     end
   end
 end

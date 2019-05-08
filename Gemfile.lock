@@ -1,8 +1,20 @@
+GIT
+  remote: https://github.com/graphiti-api/graphiti.git
+  revision: ad7375798604983cb640ee8f012c1f5e8f562f81
+  branch: master
+  specs:
+    graphiti (1.0.3)
+      activesupport (>= 4.1, < 6)
+      concurrent-ruby (~> 1.0)
+      dry-types (~> 0.15)
+      graphiti_errors (~> 1.1.0)
+      jsonapi-serializable (~> 0.3.0)
+
 PATH
   remote: .
   specs:
     graphiti-rails (0.1.0)
-      graphiti (~> 1.0.2)
+      graphiti (~> 1.0.3)
       rails (>= 5.0)
 
 GEM
@@ -82,12 +94,6 @@ GEM
       activesupport (>= 4.2.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    graphiti (1.0.3)
-      activesupport (>= 4.1, < 6)
-      concurrent-ruby (~> 1.0)
-      dry-types (~> 0.15)
-      graphiti_errors (~> 1.0.beta.1)
-      jsonapi-serializable (~> 0.3.0)
     graphiti_errors (1.1.0)
       jsonapi-serializable (~> 0.1)
     graphiti_spec_helpers (1.0.0)
@@ -204,6 +210,7 @@ PLATFORMS
 
 DEPENDENCIES
   factory_bot
+  graphiti!
   graphiti-rails!
   graphiti_spec_helpers (~> 1.0)
   kaminari
