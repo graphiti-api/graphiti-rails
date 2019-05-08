@@ -96,7 +96,7 @@ GEM
       activesupport (>= 4.2.0)
     graphiti_errors (1.1.0)
       jsonapi-serializable (~> 0.1)
-    graphiti_spec_helpers (1.0.0)
+    graphiti_spec_helpers (1.0.1)
       graphiti (>= 1.0.alpha.1)
       rspec (~> 3.0)
     i18n (1.6.0)
@@ -212,7 +212,7 @@ DEPENDENCIES
   factory_bot
   graphiti!
   graphiti-rails!
-  graphiti_spec_helpers (~> 1.0)
+  graphiti_spec_helpers (~> 1.0.1)
   kaminari
   pry
   pry-byebug

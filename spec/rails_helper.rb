@@ -9,11 +9,6 @@ require 'factory_bot'
 FactoryBot.find_definitions
 
 module SpecHelpers
-  # https://github.com/graphiti-api/graphiti_spec_helpers/issues/8
-  def jsonapi_headers
-    super.merge('HTTP_ACCEPT' => 'application/vnd.api+json')
-  end
-
   def handle_request_exceptions
     original_value = Rails.application.config.action_dispatch.handle_exceptions
 
