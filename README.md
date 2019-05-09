@@ -14,6 +14,8 @@ gem 'graphiti-rails'
 
 ### Additional Setup
 
+#### Debug Exception Format
+
 If you're already running Rails in [API-only mode](https://guides.rubyonrails.org/api_app.html#changing-an-existing-application), there's no additional setup. Otherwise, we recommend the following in `config/application.rb`:
 
 ```ruby
@@ -21,6 +23,14 @@ config.debug_exception_response_format = :api
 ```
 
 This will cause the [`ActionDispatch::DebugExceptions`][debug-exceptions] middleware to generate debug information in the requested content-type instead of as HTML only. In turn, this allows graphti-rails to generate more specific error messages for JSON API requests.
+
+#### Handled Exception Formats
+
+Since Rails doesn't correctly format exceptions for JSON:API requests, graphiti-rails intercepts these requests for proper rendering. If you'd like to use the GraphitiError handlers for other response types as well, you can add them in `config/application.rb`:
+
+```ruby
+config.graphiti.handled_exception_formats += [:xml]
+```
 
 ## Features
 

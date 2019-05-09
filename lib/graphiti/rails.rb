@@ -16,8 +16,8 @@ module Graphiti
       ActiveSupport::Deprecation.warn("With graphiti-rails, including Graphiti::Rails is unnecessary")
     end
 
-    # A list of formats as symbols which will be handled by a GraphitiErrors::ExceptionHandler.
-    # Defaults to `[:jsonapi]`.
+    # @!attribute self.handled_exception_formats
+    # A list of formats as symbols which will be handled by a GraphitiErrors::ExceptionHandler. See {Railtie}.
     cattr_accessor :handled_exception_formats, default: []
 
     autoload :Context, "graphiti/rails/context"

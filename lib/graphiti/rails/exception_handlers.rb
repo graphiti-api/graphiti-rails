@@ -3,7 +3,7 @@ module Graphiti
     # Extends the default GraphitiErrors::ExceptionHandler for more Railsy behavior.
     module ExceptionHandlerExtensions
       # Returns the status code for the given error.
-      # Unlike the default behavior, it will look for codes {registered with ActionDispatch}
+      # Unlike the default behavior, it will look for codes {Railtie registered with ActionDispatch}
       # before defaulting to 500.
       # @return [Integer] HTTP Status Code
       def status_code(error)

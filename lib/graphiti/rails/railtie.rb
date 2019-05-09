@@ -4,7 +4,7 @@ module Graphiti
   module Rails
     # This Railtie registers Graphiti error classes with ActionDispatch. It also exposes
     # `config.graphiti.handled_exception_formats` which defaults to `[:jsonapi]`.
-    # @see Graphiti::Rails.handled_exception_formats
+    # Formats in this list will always have their exceptions handled by Graphiti.
     class Railtie < ::Rails::Railtie
       GRAPHITI_ERROR_CODES = {
         # There are many other Graphiti Errors but we are assuming they'll be rolled up into InvalidRequest or are 5xx errors
