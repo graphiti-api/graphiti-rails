@@ -10,11 +10,8 @@ module Graphiti
         # There are many other Graphiti Errors but we are assuming they'll be rolled up into InvalidRequest or are 5xx errors
         "Graphiti::Errors::InvalidRequest" => :bad_request,
         "Graphiti::Errors::RecordNotFound" => :not_found,
-        "Graphiti::Errors::RemoteWrite" => :bad_request
-
-        # TODO: We may want to include this if it ends up not being easily rolled up into InvalidRequest
-        # https://github.com/wagenet/graphiti-rails/issues/16
-        # "Graphiti::Errors::SingularSideload" => :bad_request,
+        "Graphiti::Errors::RemoteWrite" => :bad_request,
+        "Graphiti::Errors::SingularSideload" => :bad_request
       }
 
       config.graphiti = ActiveSupport::OrderedOptions.new
