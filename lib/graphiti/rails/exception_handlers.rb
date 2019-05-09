@@ -1,67 +1,79 @@
 module Graphiti
   module Rails
-    # Extends the default GraphitiErrors::ExceptionHandler for more Railsy behavior.
-    module ExceptionHandlerExtensions
-      # Returns the status code for the given error.
-      # Unlike the default behavior, it will look for codes {Railtie registered with ActionDispatch}
-      # before defaulting to 500.
-      # @return [Integer] HTTP Status Code
-      def status_code(error)
-        # TODO: See if we can get GraphitiErrors to have default codes
-        @status || ActionDispatch::ExceptionWrapper.status_code_for_exception(error.class.name) || 500
-      end
-
-      # Returns a detailed error message.
-      # Unlike the default behavior in that it does not send a fallback detail if the error is not fatal.
-      # @return [String]
-      def detail(error)
-        if @message == true
-          error.message
-        else
-          @message ? @message.call(error) : default_detail(error)
-        end
-      end
-
-      # Whether the error is fatal, i.e. 5xx
-      # @return [Boolean]
-      def fatal?(error)
-        # TODO: Get some notion of fatal errors into GraphitiErrors
-        status_code(error) >= 500
-      end
-
-      private
-
-      def default_detail(error)
-        if fatal?(error)
+    class ExceptionHandler < RescueRegistry::ExceptionHandler
+      # TODO: Maybe this should go into RescueRegistry::ExceptionHandler
+      def detail
+        if status_code >= 500
           "We've notified our engineers and hope to address this issue shortly."
         end
       end
-    end
 
-    class DefaultExceptionHandler < GraphitiErrors::ExceptionHandler
-      include ExceptionHandlerExtensions
+      # We've actually changed the signature here which is somewhat risky...
+      def build_payload(show_details: false, traces: nil, style: :rails)
+        case style
+        when :standard
+          super(show_details: show_details, traces: traces)
+        when :rails
+          # TODO: Find way to not duplicate RailsExceptionHandler
+          body = {
+            status: status_code,
+            error:  title
+          }
 
-      # Returns a title for the error.
-      # Unlike the default behavior, it tries to get a name from Rack::Util's list of status code mappings
-      # before falling back to the default "Error".
-      # @return [String]
-      def title(error = nil)
-        # TODO: Have GraphitiErrors take the parameter by default
-        @title || Rack::Utils::HTTP_STATUS_CODES[status_code(error)] || "Error"
-      end
+          if show_details
+            body[:exception] = exception.inspect
+            if traces
+              body[:traces] = traces
+            end
+          end
 
-      # Returns the payload for the error
-      # Augments the default behavior with smarter titles.
-      # @return [Hash]
-      def error_payload(error)
-        super.tap do |payload|
-          payload[:errors][0][:title] = title(error)
+          body
+        else
+          raise ArgumentError, "unknown style #{style}"
         end
       end
+
+      def formatted_response(content_type, **options)
+        # We're relying on the fact that `formatted_response` passes through unknown options to `build_payload`
+        if Graphiti::Rails.handled_exception_formats.include?(content_type.to_sym)
+          options[:style] = :standard
+        end
+        super
+      end
     end
 
-    class InvalidRequestExceptionHandler < GraphitiErrors::InvalidRequest::ExceptionHandler
-      include ExceptionHandlerExtensions
+    class InvalidRequestHandler < ExceptionHandler
+      # Mostly copied from GraphitiErrors could use some cleanup
+      # NOTE: That `style` is ignored
+      def build_payload(show_details: false, traces: nil, style: nil)
+        errors = exception.errors
+
+        errors_payload = []
+        errors.details.each_pair do |attribute, att_errors|
+          att_errors.each_with_index do |error, idx|
+            code = error[:error]
+            message = errors.messages[attribute][idx]
+
+            errors_payload << {
+              code: "bad_request",
+              status: "400",
+              title: "Request Error",
+              detail: errors.full_message(attribute, message),
+              source: {
+                pointer: attribute.to_s.tr(".", "/").gsub(/\[(\d+)\]/, '/\1'),
+              },
+              meta: {
+                attribute: attribute,
+                message: message,
+                code: code,
+              },
+            }
+          end
+        end
+
+        { errors: errors_payload }
+      end
     end
   end
 end
+
