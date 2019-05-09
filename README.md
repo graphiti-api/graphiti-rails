@@ -13,7 +13,8 @@ gem 'graphiti-rails'
 ```
 
 ### Additional Setup
-We also recommend the following in `config/application.rb`:
+
+If you're already running Rails in [API-only mode](https://guides.rubyonrails.org/api_app.html#changing-an-existing-application), there's no additional setup. Otherwise, we recommend the following in `config/application.rb`:
 
 ```ruby
 config.debug_exception_response_format = :api
