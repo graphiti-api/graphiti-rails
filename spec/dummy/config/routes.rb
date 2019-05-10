@@ -5,5 +5,5 @@ Rails.application.routes.draw do
 
   get "/not_found" => "static#not_found"
   get "/graphiti_not_found" => "static#graphiti_not_found"
-  get "/rescue" => "rescue#index"
+  get "/fatal" => "static#fatal"
 end

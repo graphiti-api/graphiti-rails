@@ -1,13 +1,6 @@
 module Graphiti
   module Rails
     class ExceptionHandler < RescueRegistry::ExceptionHandler
-      # TODO: Maybe this should go into RescueRegistry::ExceptionHandler
-      def detail
-        if status_code >= 500
-          "We've notified our engineers and hope to address this issue shortly."
-        end
-      end
-
       # We've actually changed the signature here which is somewhat risky...
       def build_payload(show_details: false, traces: nil, style: :rails)
         case style
