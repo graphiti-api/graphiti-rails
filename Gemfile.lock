@@ -14,7 +14,7 @@ PATH
   remote: .
   specs:
     graphiti-rails (0.1.0)
-      graphiti (~> 1.0.3)
+      graphiti (~> 1.0)
       rails (>= 5.0)
 
 GEM
@@ -217,7 +217,7 @@ DEPENDENCIES
   factory_bot
   graphiti!
   graphiti-rails!
-  graphiti_spec_helpers (~> 1.0.1)
+  graphiti_spec_helpers (~> 1.0)
   kaminari
   kramdown-parser-gfm
   pry
