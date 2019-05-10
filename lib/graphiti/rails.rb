@@ -11,6 +11,7 @@ module Graphiti
     autoload :Context, "graphiti/rails/context"
     autoload :Debugging, "graphiti/rails/debugging"
     autoload :ExceptionHandler, "graphiti/rails/exception_handlers"
+    autoload :FallbackHandler, "graphiti/rails/exception_handlers"
     autoload :InvalidRequestHandler, "graphiti/rails/exception_handlers"
 
     def self.included(_klass)
@@ -27,9 +28,8 @@ ActiveSupport.on_load(:action_controller) do
   include Graphiti::Rails::Context
   include Graphiti::Rails::Debugging
 
-  # A global handler here is somewhat risky. However, we default to using Rails-style rendering so it shouldn't cause
-  # changes to what people are expecting. We should write more tests though.
-  register_exception Exception, status: :passthrough, handler: Graphiti::Rails::ExceptionHandler
+  # A global handler here is somewhat risky. However, we explicitly only handle JSON:API by default.
+  register_exception Exception, status: :passthrough, handler: Graphiti::Rails::FallbackHandler
 
   register_exception Graphiti::Errors::InvalidRequest,   status: 400, handler: Graphiti::Rails::InvalidRequestHandler
   register_exception Graphiti::Errors::RecordNotFound,   status: 404, handler: Graphiti::Rails::ExceptionHandler

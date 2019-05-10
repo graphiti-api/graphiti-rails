@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/wagenet/rescue_registry.git
-  revision: 7674c08e42b6d837dd1f83b57150b1b79dc44778
+  revision: 8528fcf944cc5a209114b4d8569f2ce71bd2e81c
   branch: master
   specs:
     rescue_registry (0.1.0)

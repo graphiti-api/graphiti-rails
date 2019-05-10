@@ -42,6 +42,17 @@ module Graphiti
       end
     end
 
+    class FallbackHandler < ExceptionHandler
+      def formatted_response(content_type, **options)
+        if Graphiti::Rails.handled_exception_formats.include?(content_type.to_sym)
+          super
+        else
+          # The nil response will cause the default Rails handler to be used
+          nil
+        end
+      end
+    end
+
     class InvalidRequestHandler < ExceptionHandler
       # Mostly copied from GraphitiErrors could use some cleanup
       # NOTE: That `style` is ignored
