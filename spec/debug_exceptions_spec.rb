@@ -24,6 +24,16 @@ RSpec.describe "debugging exceptions", type: :request do
         jsonapi_get "/not_found"
         expect_jsonapi_error("ActiveRecord::RecordNotFound", detailed: true)
       end
+
+      it "renders details for a fatal error" do
+        jsonapi_get "/fatal"
+        error = {
+          "code" => "internal_server_error",
+          "title" => "Internal Server Error",
+          "detail" => "We've notified our engineers and hope to address this issue shortly."
+        }
+        expect_jsonapi_error("StandardError", status: 500, error: error, detailed: true)
+      end
     end
 
     context "additional registered format" do

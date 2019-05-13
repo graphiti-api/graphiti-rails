@@ -10,12 +10,21 @@ GIT
       graphiti_errors (~> 1.1.0)
       jsonapi-serializable (~> 0.3.0)
 
+GIT
+  remote: https://github.com/wagenet/rescue_registry.git
+  revision: 5b481ba1e59787e8df626f988ceae1ed7ee6c4ce
+  branch: master
+  specs:
+    rescue_registry (0.1.0)
+      rails (>= 5.0)
+
 PATH
   remote: .
   specs:
     graphiti-rails (0.1.0)
       graphiti (~> 1.0)
       rails (>= 5.0)
+      rescue_registry
 
 GEM
   remote: https://rubygems.org/
@@ -222,6 +231,7 @@ DEPENDENCIES
   kramdown-parser-gfm
   pry
   pry-byebug
+  rescue_registry!
   responders
   rouge
   rspec-rails

@@ -35,16 +35,16 @@ module SpecHelpers
     Rails.application.config.action_dispatch.show_detailed_exceptions = original_value
   end
 
-  def expect_jsonapi_error(error_name, detailed: false)
+  def expect_jsonapi_error(error_name, status: 404, error: { }, detailed: false)
     expect(response).to_not be_successful
-    expect(response.status).to eq(404)
+    expect(response.status).to eq(status)
     expect(response.content_type).to eq("application/vnd.api+json")
 
     meta =
       if detailed
         hash_including(
-          "__raw_error__" => hash_including(
-            "message" => error_name
+          "__details__" => a_hash_including(
+            "exception" => a_string_including(error_name)
           )
         )
       else
@@ -53,11 +53,11 @@ module SpecHelpers
 
     json = JSON.parse(response.body)
     expect(json["errors"]).to match([
-      hash_including(
-        "code" => "not_found",
-        "status" => "404",
-        "title" => "Not Found",
-        "meta" => meta
+      a_hash_including(
+        { "code" => "not_found",
+          "status" => status.to_s,
+          "title" => "Not Found",
+          "meta" => meta }.merge(error)
       )
     ])
   end
@@ -71,9 +71,9 @@ module SpecHelpers
     expect(response.body).to include("<code type=\"symbol\">not_found</code>")
 
     if detailed
-      expect(response.body).to include("<__raw-error__>")
+      expect(response.body).to include("<__details__>")
     else
-      expect(response.body).to_not include("<__raw-error__>")
+      expect(response.body).to_not include("<__details__>")
     end
   end
 
