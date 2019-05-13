@@ -14,6 +14,7 @@ gemspec
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
 
+gem "graphiti", git: "https://github.com/wagenet/graphiti.git", branch: "graphiti-rails"
 gem "rescue_registry", git: "https://github.com/wagenet/rescue_registry.git", branch: "master"
 
 gem "pry"

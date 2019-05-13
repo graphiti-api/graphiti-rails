@@ -114,7 +114,7 @@ module Graphiti
     end
 
     def responders?
-      defined?(Responders)
+      defined?(::Responders)
     end
 
     def generate_controller

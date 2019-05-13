@@ -12,7 +12,9 @@ module Graphiti
       config.graphiti = ActiveSupport::OrderedOptions.new
 
       config.graphiti.handled_exception_formats = [:jsonapi]
-      config.graphiti.respond_to_formats = Graphiti.config.try(:respond_to) || [:json, :jsonapi, :xml]
+
+      old_respond_to_formats = Graphiti::DEPRECATOR.silence { Graphiti.config.try(:respond_to) }
+      config.graphiti.respond_to_formats = old_respond_to_formats || [:json, :jsonapi, :xml]
 
       rake_tasks do
         load File.expand_path("../../tasks/graphiti.rake", __dir__)
@@ -45,6 +47,7 @@ module Graphiti
           end
         end
 
+        register_mime_type
         register_parameter_parser
         register_renderers
         establish_concurrency
@@ -52,10 +55,16 @@ module Graphiti
       end
 
       # from jsonapi-rails
+      MEDIA_TYPE = 'application/vnd.api+json'.freeze
+
       PARSER = lambda do |body|
         data = JSON.parse(body)
         data[:format] = :jsonapi
         data.with_indifferent_access
+      end
+
+      def register_mime_type
+        Mime::Type.register(MEDIA_TYPE, :jsonapi)
       end
 
       def register_parameter_parser

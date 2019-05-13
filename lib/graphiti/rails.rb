@@ -1,5 +1,5 @@
 require 'rescue_registry'
-require 'graphiti/errors'
+require 'graphiti'
 
 module Graphiti
   if defined?(Graphiti::Rails)
@@ -24,7 +24,7 @@ module Graphiti
     cattr_accessor :handled_exception_formats, default: []
 
     # @!attribute self.respond_to_formats
-    # A list of formats as symbols which will be available for Graphiti::Responders. See {Railtie}.
+    # A list of formats as symbols which will be available for Graphiti::Rails::Responders. See {Railtie}.
     cattr_accessor :respond_to_formats, default: []
   end
 end

@@ -72,15 +72,9 @@ module Graphiti
 
     def app_controller_code
       str = ""
-      str << "  include Graphiti::Rails\n"
-      str << "  include Graphiti::Responders\n"
-      str << "\n"
-      str << "  register_exception Graphiti::Errors::RecordNotFound,\n"
-      str << "    status: 404\n"
-      str << "\n"
-      str << "  rescue_from Exception do |e|\n"
-      str << "    handle_exception(e)\n"
-      str << "  end\n"
+      if defined?(::Responders)
+        str << "  include Graphiti::Rails::Responders\n"
+      end
       str
     end
   end
