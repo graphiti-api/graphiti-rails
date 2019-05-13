@@ -21,10 +21,18 @@ module Graphiti
       initializer "graphiti-rails.config" do |app|
         Graphiti::Rails.handled_exception_formats = app.config.graphiti.handled_exception_formats
         Graphiti::Rails.respond_to_formats = app.config.graphiti.respond_to_formats
+
+        if File.exist?("#{::Rails.root}/.graphiticfg.yml")
+          cfg = YAML.load_file("#{::Rails.root}/.graphiticfg.yml")
+          Graphiti.config.schema_path = "#{::Rails.root}/public#{cfg["namespace"]}/schema.json"
+        else
+          Graphiti.config.schema_path = "#{::Rails.root}/public/schema.json"
+        end
       end
 
       initializer "graphti-rails.logger" do
         config.after_initialize do
+          Graphiti.config.debug = ::Rails.logger.level.zero?
           Graphiti.logger = ::Rails.logger
         end
       end
