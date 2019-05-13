@@ -1,16 +1,4 @@
 GIT
-  remote: https://github.com/graphiti-api/graphiti.git
-  revision: ad7375798604983cb640ee8f012c1f5e8f562f81
-  branch: master
-  specs:
-    graphiti (1.0.3)
-      activesupport (>= 4.1, < 6)
-      concurrent-ruby (~> 1.0)
-      dry-types (~> 0.15)
-      graphiti_errors (~> 1.1.0)
-      jsonapi-serializable (~> 0.3.0)
-
-GIT
   remote: https://github.com/wagenet/rescue_registry.git
   revision: 5b481ba1e59787e8df626f988ceae1ed7ee6c4ce
   branch: master
@@ -103,6 +91,12 @@ GEM
       activesupport (>= 4.2.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    graphiti (1.1.0)
+      activesupport (>= 4.1, < 6)
+      concurrent-ruby (~> 1.0)
+      dry-types (~> 0.15)
+      graphiti_errors (~> 1.1.0)
+      jsonapi-serializable (~> 0.3.0)
     graphiti_errors (1.1.0)
       jsonapi-serializable (~> 0.1)
     graphiti_spec_helpers (1.0.1)
@@ -224,7 +218,6 @@ PLATFORMS
 
 DEPENDENCIES
   factory_bot
-  graphiti!
   graphiti-rails!
   graphiti_spec_helpers (~> 1.0)
   kaminari
