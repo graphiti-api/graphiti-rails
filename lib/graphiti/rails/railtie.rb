@@ -2,20 +2,25 @@
 
 module Graphiti
   module Rails
-    # This Railtie exposes
-    # `config.graphiti.handled_exception_formats` which defaults to `[:jsonapi]`.
-    # Formats in this list will always have their exceptions handled by Graphiti.
+    # This Railtie exposes some configuration options:
+    # * `config.graphiti.handled_exception_formats`, defaulting to `[:jsonapi]`.
+    #   Formats in this list will always have their exceptions handled by Graphiti.
+    # * `config.graphiti.respond_to_formats`, defaulting to `[:json, :jsonapi, :xml]`.
+    #   When {Graphiti::Rails::Responders} is included in a controller it will respond
+    #   to these mime types by default.
     class Railtie < ::Rails::Railtie
       config.graphiti = ActiveSupport::OrderedOptions.new
 
       config.graphiti.handled_exception_formats = [:jsonapi]
+      config.graphiti.respond_to_formats = Graphiti.config.try(:respond_to) || [:json, :jsonapi, :xml]
 
       rake_tasks do
         load File.expand_path("../../tasks/graphiti.rake", __dir__)
       end
 
-      initializer "graphiti-rails.handled_exception_formats" do |app|
+      initializer "graphiti-rails.config" do |app|
         Graphiti::Rails.handled_exception_formats = app.config.graphiti.handled_exception_formats
+        Graphiti::Rails.respond_to_formats = app.config.graphiti.respond_to_formats
       end
 
       initializer "graphti-rails.logger" do

@@ -10,6 +10,7 @@ module Graphiti
   module Rails
     autoload :Context, "graphiti/rails/context"
     autoload :Debugging, "graphiti/rails/debugging"
+    autoload :Responders, "graphiti/rails/responders"
     autoload :ExceptionHandler, "graphiti/rails/exception_handlers"
     autoload :FallbackHandler, "graphiti/rails/exception_handlers"
     autoload :InvalidRequestHandler, "graphiti/rails/exception_handlers"
@@ -21,6 +22,10 @@ module Graphiti
     # @!attribute self.handled_exception_formats
     # A list of formats as symbols which will be handled by a GraphitiErrors::ExceptionHandler. See {Railtie}.
     cattr_accessor :handled_exception_formats, default: []
+
+    # @!attribute self.respond_to_formats
+    # A list of formats as symbols which will be available for Graphiti::Responders. See {Railtie}.
+    cattr_accessor :respond_to_formats, default: []
   end
 end
 
