@@ -18,6 +18,8 @@ module Graphiti
 
     def self.included(klass)
       ActiveSupport::Deprecation.warn("Please update your controllers to graphiti-rails style")
+      require 'graphiti_errors'
+      klass.send(:include, GraphitiErrors)
     end
 
     # @!attribute self.handled_exception_formats
