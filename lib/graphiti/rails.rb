@@ -9,6 +9,8 @@ module Graphiti
 
   # Rails integration for Graphiti. See {file:README.md} for more details.
   module Rails
+    DEPRECATOR = ActiveSupport::Deprecation.new('1.0', 'graphiti-rails')
+
     autoload :Context, "graphiti/rails/context"
     autoload :Debugging, "graphiti/rails/debugging"
     autoload :Responders, "graphiti/rails/responders"
@@ -17,7 +19,7 @@ module Graphiti
     autoload :InvalidRequestHandler, "graphiti/rails/exception_handlers"
 
     def self.included(klass)
-      ActiveSupport::Deprecation.warn("Please update your controllers to graphiti-rails style")
+      DEPRECATOR.deprecation_warning("Including Graphiti::Rails", "See https://www.graphiti.dev/guides/graphiti-rails-migration for help migrating to the new format")
       require 'graphiti_errors'
       klass.send(:include, GraphitiErrors)
     end
