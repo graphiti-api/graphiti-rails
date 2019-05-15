@@ -1,7 +1,3 @@
-# Undefine tasks from `graphiti` gem to avoid duplicated work.
-Rake::Task[:"graphiti:request"].clear if Rake::Task.task_defined?(:"graphiti:request")
-Rake::Task[:"graphiti:benchmark"].clear  if Rake::Task.task_defined?(:"graphiti:benchmark")
-
 namespace :graphiti do
   def session
     @session ||= ActionDispatch::Integration::Session.new(Rails.application)
