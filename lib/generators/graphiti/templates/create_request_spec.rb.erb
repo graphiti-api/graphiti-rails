@@ -1,0 +1,35 @@
+require 'rails_helper'
+
+RSpec.describe "<%= type %>#create", type: :request do
+  subject(:make_request) do
+    jsonapi_post "<%= api_namespace %>/<%= type %>", payload
+  end
+
+  describe 'basic create' do
+    let(:params) do
+      <%- if defined?(FactoryBot) -%>
+      attributes_for(:<%= type.to_s.singularize %>)
+      <%- else -%>
+      {
+        # ... your attrs here
+      }
+      <%- end -%>
+    end
+    let(:payload) do
+      {
+        data: {
+          type: '<%= type %>',
+          attributes: params
+        }
+      }
+    end
+
+    it 'works' do
+      expect(<%= resource_class %>).to receive(:build).and_call_original
+      expect {
+        make_request
+        expect(response.status).to eq(201), response.body
+      }.to change { <%= model_class %>.count }.by(1)
+    end
+  end
+end

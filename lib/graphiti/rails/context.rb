@@ -21,13 +21,12 @@ module Graphiti
       # The context to use for Graphiti Resources. Defaults to the controller instance.
       # Can be redefined for different behavior.
       def graphiti_context
-        jsonapi_context
-      end
-
-      # @private
-      # @deprecated Use {#graphiti_context} instead
-      def jsonapi_context
-        self
+        if respond_to?(:jsonapi_context)
+          DEPRECATOR.deprecation_warning("Overriding jsonapi_context", "Override #graphiti_context instead")
+          jsonapi_context
+        else
+          self
+        end
       end
     end
   end

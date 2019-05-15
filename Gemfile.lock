@@ -1,22 +1,14 @@
 GIT
-  remote: https://github.com/graphiti-api/graphiti.git
-  revision: ad7375798604983cb640ee8f012c1f5e8f562f81
-  branch: master
+  remote: https://github.com/wagenet/graphiti.git
+  revision: 97856482247459783d4268765282b0f23d97e320
+  branch: graphiti-rails
   specs:
-    graphiti (1.0.3)
+    graphiti (1.1.0)
       activesupport (>= 4.1, < 6)
       concurrent-ruby (~> 1.0)
       dry-types (~> 0.15)
       graphiti_errors (~> 1.1.0)
       jsonapi-serializable (~> 0.3.0)
-
-GIT
-  remote: https://github.com/wagenet/rescue_registry.git
-  revision: 5b481ba1e59787e8df626f988ceae1ed7ee6c4ce
-  branch: master
-  specs:
-    rescue_registry (0.1.0)
-      rails (>= 5.0)
 
 PATH
   remote: .
@@ -24,7 +16,7 @@ PATH
     graphiti-rails (0.1.0)
       graphiti (~> 1.0)
       rails (>= 5.0)
-      rescue_registry
+      rescue_registry (~> 0.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -177,6 +169,8 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.19.0, < 2.0)
     rake (12.3.2)
+    rescue_registry (0.1.0)
+      rails (>= 5.0, < 7.0)
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
@@ -231,7 +225,6 @@ DEPENDENCIES
   kramdown-parser-gfm
   pry
   pry-byebug
-  rescue_registry!
   responders
   rouge
   rspec-rails
