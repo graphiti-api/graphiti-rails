@@ -1,5 +1,6 @@
 require 'rescue_registry'
 require 'graphiti'
+require 'rails'
 
 module Graphiti
   if defined?(Graphiti::Rails)
@@ -15,8 +16,8 @@ module Graphiti
     autoload :FallbackHandler, "graphiti/rails/exception_handlers"
     autoload :InvalidRequestHandler, "graphiti/rails/exception_handlers"
 
-    def self.included(_klass)
-      ActiveSupport::Deprecation.warn("With graphiti-rails, including Graphiti::Rails is unnecessary")
+    def self.included(klass)
+      ActiveSupport::Deprecation.warn("Please update your controllers to graphiti-rails style")
     end
 
     # @!attribute self.handled_exception_formats
