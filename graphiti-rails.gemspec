@@ -15,9 +15,9 @@ Gem::Specification.new do |spec|
   spec.license     = "MIT"
 
   spec.metadata = {
-    "bug_tracker_uri"   => "https://github.com/wagenet/graphiti-rails/issues",
-    "changelog_uri"     => "https://github.com/wagenet/graphiti-rails/CHANGELOG.md",
-    "source_code_uri"   => "https://github.com/wagenet/graphiti-rails"
+    "bug_tracker_uri"   => "https://github.com/graphiti-api/graphiti-rails/issues",
+    "changelog_uri"     => "https://github.com/graphiti-api/graphiti-rails/CHANGELOG.md",
+    "source_code_uri"   => "https://github.com/graphiti-api/graphiti-rails"
     # "documentation_uri" => "https://www.example.info/gems/bestgemever/0.0.1",
     # "mailing_list_uri"  => "https://groups.example.com/bestgemever",
     # "wiki_uri"          => "https://example.com/user/bestgemever/wiki"
