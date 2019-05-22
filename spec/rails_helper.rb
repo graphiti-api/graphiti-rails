@@ -9,32 +9,6 @@ require 'factory_bot'
 FactoryBot.find_definitions
 
 module SpecHelpers
-  def handle_request_exceptions(handle = true)
-    original_value = Rails.application.config.action_dispatch.handle_exceptions
-
-    Rails.application.config.action_dispatch.handle_exceptions = handle
-    # Also set this since it may have been cached
-    Rails.application.env_config["action_dispatch.show_exceptions"] = handle
-
-    yield
-
-    Rails.application.env_config["action_dispatch.show_exceptions"] = original_value
-    Rails.application.config.action_dispatch.handle_exceptions = original_value
-  end
-
-  def show_detailed_exceptions(show = true)
-    original_value = Rails.application.config.action_dispatch.show_detailed_exceptions
-
-    Rails.application.config.action_dispatch.show_detailed_exceptions = show
-    # Also set this since it may have been cached
-    Rails.application.env_config["action_dispatch.show_detailed_exceptions"] = show
-
-    yield
-
-    Rails.application.env_config["action_dispatch.show_detailed_exceptions"] = original_value
-    Rails.application.config.action_dispatch.show_detailed_exceptions = original_value
-  end
-
   def expect_jsonapi_error(error_name, status: 404, error: { }, detailed: false)
     expect(response).to_not be_successful
     expect(response.status).to eq(status)
@@ -103,6 +77,7 @@ RSpec.configure do |config|
   config.include GraphitiSpecHelpers::RSpec
   config.include GraphitiSpecHelpers::Sugar
   config.include FactoryBot::Syntax::Methods
+  config.include RescueRegistry::RailsTestHelpers
   config.include SpecHelpers
 
   config.example_status_persistence_file_path = File.expand_path(".rspec-examples.txt", __dir__)

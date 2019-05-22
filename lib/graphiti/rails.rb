@@ -16,6 +16,7 @@ module Graphiti
     autoload :Responders, "graphiti/rails/responders"
     autoload :ExceptionHandler, "graphiti/rails/exception_handlers"
     autoload :FallbackHandler, "graphiti/rails/exception_handlers"
+    autoload :GraphitiErrorsTesting, "graphiti/rails/graphiti_errors_testing"
     autoload :InvalidRequestHandler, "graphiti/rails/exception_handlers"
 
     def self.included(klass)
@@ -52,3 +53,7 @@ ActiveSupport.on_load(:active_record) do
 end
 
 require "graphiti/rails/railtie"
+
+if defined?(GraphitiErrors) && Rails.respond_to?(:env) && Rails.env.test?
+  GraphitiErrors.singleton_class.prepend(Graphiti::Rails::GraphitiErrorsTesting)
+end
