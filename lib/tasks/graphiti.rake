@@ -1,4 +1,6 @@
 namespace :graphiti do
+  include RescueRegistry::RailsTestHelpers
+
   def session
     @session ||= ActionDispatch::Integration::Session.new(Rails.application)
   end
@@ -19,7 +21,9 @@ namespace :graphiti do
       "?cache=bust"
     end
     path = "#{path}&debug=true" if debug
-    session.get(path.to_s)
+    handle_request_exceptions do
+      session.get(path.to_s)
+    end
     JSON.parse(session.response.body)
   end
 
