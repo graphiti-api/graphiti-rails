@@ -13,11 +13,12 @@ module Graphiti
 
     autoload :Context, "graphiti/rails/context"
     autoload :Debugging, "graphiti/rails/debugging"
-    autoload :Responders, "graphiti/rails/responders"
     autoload :ExceptionHandler, "graphiti/rails/exception_handlers"
     autoload :FallbackHandler, "graphiti/rails/exception_handlers"
     autoload :GraphitiErrorsTesting, "graphiti/rails/graphiti_errors_testing"
     autoload :InvalidRequestHandler, "graphiti/rails/exception_handlers"
+    autoload :Responders, "graphiti/rails/responders"
+    autoload :TestHelpers, "graphiti/rails/test_helpers"
 
     def self.included(klass)
       DEPRECATOR.deprecation_warning("Including Graphiti::Rails", "See https://www.graphiti.dev/guides/graphiti-rails-migration for help migrating to the new format")
