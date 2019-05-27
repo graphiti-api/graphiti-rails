@@ -14,7 +14,5 @@ gemspec
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
 
-gem "graphiti", git: "https://github.com/graphiti-api/graphiti.git", branch: "master"
-
 gem "pry"
 gem "pry-byebug"
