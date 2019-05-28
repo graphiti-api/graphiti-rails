@@ -132,10 +132,7 @@ module Graphiti
     end
 
     def generate_route
-      # Rails 5.2 adds `plural_route_name`, fallback to `plural_table_name`
-      plural_name = try(:plural_route_name) || plural_table_name
-
-      code = "resources :#{plural_name}"
+      code = "resources :#{file_name.pluralize}"
       code << %(, only: [#{actions.map { |a| ":#{a}" }.join(", ")}]) if actions.length < 5
       code << "\n"
       inject_into_file "config/routes.rb", after: /ApplicationResource.*$\n/ do
