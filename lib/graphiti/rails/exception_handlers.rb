@@ -5,7 +5,16 @@ module Graphiti
       def build_payload(show_details: false, traces: nil, style: :rails)
         case style
         when :standard
-          super(show_details: show_details, traces: traces)
+          super(show_details: show_details, traces: traces).tap do |payload|
+            if show_details
+              # For Vandal and Request Responses
+              payload[:__raw_error__] = {
+                message: exception.message,
+                debug: exception.instance_variable_get(:@__graphiti_debug),
+                backtrace: exception.backtrace
+              }
+            end
+          end
         when :rails
           # TODO: Find way to not duplicate RailsExceptionHandler
           body = {

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    graphiti-rails (0.1.0)
+    graphiti-rails (0.2.0)
       graphiti (~> 1.2)
       rails (>= 5.0)
       rescue_registry (~> 0.2.1)
