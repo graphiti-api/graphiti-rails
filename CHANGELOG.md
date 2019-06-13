@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [0.2.1] - 2019-05-27
+## [0.2.1] - 2019-06-13
 ### Added
 - Include `__raw_errors__` in detailed error payloads for use by Vandal and Request Responses
 
