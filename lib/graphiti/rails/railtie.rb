@@ -37,7 +37,11 @@ module Graphiti
 
       initializer "graphti-rails.logger" do
         config.after_initialize do
-          debugger_enabled = ENV.fetch['GRAPHITI_DEBUG'] == 'false' || Graphiti.config.debug
+          puts "=" * 100
+          debugger_enabled = ENV['GRAPHITI_DEBUG'] == 'false' || Graphiti.config.debug
+          puts ENV.fetch['GRAPHITI_DEBUG']
+          puts Graphiti.config.debug
+          puts "=" * 100
           Graphiti.config.debug = debugger_enabled && ::Rails.logger.level.zero?
           Graphiti.logger = ::Rails.logger
         end
