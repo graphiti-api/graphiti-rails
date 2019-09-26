@@ -37,7 +37,7 @@ module Graphiti
 
       initializer "graphti-rails.logger" do
         config.after_initialize do
-          Graphiti.config.debug = ::Rails.logger.level.zero?
+          Graphiti.config.debug = ::Rails.logger.level.zero? && Graphiti.config.debug
           Graphiti.logger = ::Rails.logger
         end
       end
