@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "graphiti", "~> 1.2"
   spec.add_dependency "rescue_registry", "~> 0.2.1"
-  spec.add_dependency "rails", ">= 6.0"
+  spec.add_dependency "rails", ">= 5.0"
 
   spec.add_development_dependency "sqlite3"
   spec.add_development_dependency "rspec-rails", "4.0.0.beta2"

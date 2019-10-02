@@ -3,7 +3,7 @@ PATH
   specs:
     graphiti-rails (0.2.2)
       graphiti (~> 1.2)
-      rails (>= 6.0)
+      rails (>= 5.0)
       rescue_registry (~> 0.2.1)
 
 GEM
