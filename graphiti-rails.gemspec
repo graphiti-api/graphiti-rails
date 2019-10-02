@@ -30,10 +30,10 @@ Gem::Specification.new do |spec|
   spec.add_dependency "rails", ">= 5.0"
 
   spec.add_development_dependency "sqlite3"
-  spec.add_development_dependency "rspec-rails", "4.0.0.beta2"
+  spec.add_development_dependency "rspec-rails"
   spec.add_development_dependency "graphiti_spec_helpers", "~> 1.0"
-  spec.add_development_dependency "kaminari", "~> 1.1"
-  spec.add_development_dependency "factory_bot", "~> 5.0"
+  spec.add_development_dependency "kaminari"
+  spec.add_development_dependency "factory_bot"
   spec.add_development_dependency "responders", "~> 3.0"
   spec.add_development_dependency "yard"
   spec.add_development_dependency "kramdown-parser-gfm"

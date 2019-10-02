@@ -227,16 +227,16 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  factory_bot (~> 5.0)
+  factory_bot
   graphiti-rails!
   graphiti_spec_helpers (~> 1.0)
-  kaminari (~> 1.1)
+  kaminari
   kramdown-parser-gfm
   pry
   pry-byebug
   responders (~> 3.0)
   rouge
-  rspec-rails (= 4.0.0.beta2)
+  rspec-rails
   sqlite3
   yard
 
