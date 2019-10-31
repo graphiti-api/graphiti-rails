@@ -41,5 +41,19 @@ module Graphiti
       config = graphiti_config.merge(attrs)
       File.open(".graphiticfg.yml", "w") { |f| f.write(config.to_yaml) }
     end
+
+    def id_or_rawid
+      @options["rawid"] ? "rawid" : "id"
+    end
+
+    def sort_raw_ids
+      return unless @options["rawid"]
+      ".sort"
+    end
+
+    def sort_raw_ids_descending
+      return unless @options["rawid"]
+      ".sort.reverse"
+    end
   end
 end

@@ -14,6 +14,12 @@ module Graphiti
       aliases: ["--omit-comments", "-c"],
       desc: "Generate without documentation comments"
 
+    class_option :'rawid',
+      type: :boolean,
+      default: false,
+      aliases: ["--rawid", "-r"],
+      desc: "Generate tests using rawid"
+
     class_option :actions,
       type: :array,
       default: nil,
@@ -143,12 +149,14 @@ module Graphiti
     def generate_resource_specs
       opts = {}
       opts[:actions] = @options[:actions] if @options[:actions]
+      opts[:rawid] = @options[:rawid] if @options[:rawid]
       invoke "graphiti:resource_test", [resource_klass], opts
     end
 
     def generate_api_specs
       opts = {}
       opts[:actions] = @options[:actions] if @options[:actions]
+      opts[:rawid] = @options[:rawid] if @options[:rawid]
       invoke "graphiti:api_test", [resource_klass], opts
     end
 
