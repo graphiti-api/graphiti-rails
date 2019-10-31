@@ -13,6 +13,12 @@ module Graphiti
       aliases: ["--actions", "-a"],
       desc: 'Array of controller actions, e.g. "index show destroy"'
 
+    class_option :'rawid',
+      type: :boolean,
+      default: false,
+      aliases: ["--rawid", "-r"],
+      desc: "Generate tests using rawid"
+
     desc "Generates rspec request specs at spec/api"
     def generate
       generate_api_specs
