@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    graphiti-rails (0.2.3)
+    graphiti-rails (0.2.4)
       graphiti (~> 1.2)
       railties (>= 5.0)
       rescue_registry (~> 0.2.1)
@@ -228,4 +228,4 @@ DEPENDENCIES
   yard
 
 BUNDLED WITH
-   2.0.2
+   2.1.4

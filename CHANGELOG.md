@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.2.4] - 2020-08-10
+### Changed
+- The `rails` dependency has been replaced with `railties`. - #60
+
 ## [0.2.3] - 2019-10-31
 ### Added
 - Add option to use rawid in generated tests
