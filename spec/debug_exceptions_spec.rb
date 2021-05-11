@@ -51,7 +51,7 @@ RSpec.describe "debugging exceptions", type: :request do
       def expect_default_error
         expect(response).to_not be_successful
         expect(response.status).to eq(404)
-        expect(response.content_type).to eq("application/xml")
+        expect(response.content_type).to start_with("application/xml")
 
         expect(response.body).to include("<status type=\"integer\">404</status>")
         expect(response.body).to include("<Application-Trace type=\"array\">")
