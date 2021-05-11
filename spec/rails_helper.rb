@@ -12,7 +12,7 @@ module SpecHelpers
   def expect_jsonapi_error(error_name, status: 404, error: { }, detailed: false)
     expect(response).to_not be_successful
     expect(response.status).to eq(status)
-    expect(response.content_type).to eq("application/vnd.api+json")
+    expect(response.content_type).to start_with("application/vnd.api+json")
 
     meta =
       if detailed
@@ -40,7 +40,7 @@ module SpecHelpers
   def expect_xml_error(detailed: false)
     expect(response).to_not be_successful
     expect(response.status).to eq(404)
-    expect(response.content_type).to eq("application/xml")
+    expect(response.content_type).to start_with("application/xml")
 
     # If we want more complex, use nokogiri
     expect(response.body).to include("<code type=\"symbol\">not_found</code>")
@@ -55,7 +55,7 @@ module SpecHelpers
   def expect_html_error(detailed: false)
     expect(response).to_not be_successful
     expect(response.status).to eq(404)
-    expect(response.content_type).to eq("text/html")
+    expect(response.content_type).to start_with("text/html")
 
     # We could make this check more robust
     if detailed
