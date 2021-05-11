@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.3.0] - 2021-05-11
+### Changed
+- `rescue_registry` has been updated to 0.3.0. This causes some changes to error payloads.
+  [CHANGELOG](https://github.com/wagenet/rescue_registry/blob/master/CHANGELOG.md#030---2021-05-11)
+
 ## [0.2.4] - 2020-08-10
 ### Changed
 - The `rails` dependency has been replaced with `railties`. - #60

@@ -22,17 +22,18 @@ module SpecHelpers
           )
         )
       else
-        { }
+        nil
       end
 
     json = JSON.parse(response.body)
+
+    expected_hash = { "code" => "not_found",
+      "status" => status.to_s,
+      "title" => "Not Found" }
+    expected_hash["meta"] = meta if meta
+
     expect(json["errors"]).to match([
-      a_hash_including(
-        { "code" => "not_found",
-          "status" => status.to_s,
-          "title" => "Not Found",
-          "meta" => meta }.merge(error)
-      )
+      a_hash_including(expected_hash.merge(error))
     ])
   end
 
