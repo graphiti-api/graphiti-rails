@@ -22,7 +22,10 @@ namespace :graphiti do
     end
     path = "#{path}&debug=true" if debug
     handle_request_exceptions do
-      session.get(path.to_s)
+      headers = {
+        "Authorization": ENV['AUTHORIZATION_HEADER']
+      }.compact
+      session.get(path.to_s, headers: headers)
     end
     JSON.parse(session.response.body)
   end
