@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.4.0] - 2022-02-03
+- `rescue_registry` has been updated to 0.4.0 for Ruby 3.1 support.
+
 ## [0.3.0] - 2021-05-11
 ### Changed
 - `rescue_registry` has been updated to 0.3.0. This causes some changes to error payloads.
