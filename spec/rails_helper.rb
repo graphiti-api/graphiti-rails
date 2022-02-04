@@ -1,6 +1,11 @@
 ENV["RAILS_ENV"] ||= "test"
 
-require_relative "dummy/config/environment"
+require "rails/version"
+if Rails::VERSION::MAJOR < 7
+  require_relative "rails5/dummy/config/environment"
+else
+  require_relative "rails7/dummy/config/environment"
+end
 require "rspec/rails"
 require "rspec/mocks"
 require 'graphiti_spec_helpers/rspec'
