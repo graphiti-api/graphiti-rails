@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-gem "graphiti", github: "graphiti-api/graphiti", branch: "ruby-3-1-gha"
+gem "graphiti", github: "graphiti-api/graphiti"
 
 # Declare your gem's dependencies in graphiti-rails.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
