@@ -9,26 +9,12 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Ruby 2.6
-        uses: actions/setup-ruby@v1
-        with:
-          ruby-version: 2.6
-      - name: Install Bundler
-        run: gem install bundler
-      - name: Prep sqlite
-        run: |
-          sudo apt-get update
-          sudo apt-get install libsqlite3-dev
-      - uses: actions/cache@v2
-        with:
-          path: vendor/bundle
-          key: gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: gems-
       - uses: actions/checkout@v2
-      - name: Bundle install
-        run: |
-          bundle config path vendor/bundle
-          bundle install --jobs 4 --retry 3
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1
+          bundler-cache: true
       - name: Setup DB
         run: bundle exec rake db:setup
       - name: Run Tests
