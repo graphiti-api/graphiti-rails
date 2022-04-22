@@ -100,7 +100,10 @@ module Graphiti
       end
       if attributes_class.table_exists?
         return attributes_class.columns.map do |c|
-          OpenStruct.new({name: c.name.to_sym, type: c.type})
+          OpenStruct.new({
+            name: c.name.to_sym,
+            type: convert_column_type_to_graphiti_resource_type(c.type)
+          })
         end
       else
         raise "#{attributes_class} table must exist. Please run migrations."
@@ -180,6 +183,35 @@ module Graphiti
 
     def type
       model_klass.name.underscore.pluralize
+    end
+
+    def convert_column_type_to_graphiti_resource_type(type)
+      # TODO: Support database specific types.
+      case type
+      when :string, :text
+        :string
+      when :float, :decimal
+        :integer
+      when :integer, :bigint
+        :integer
+      when :datetime, :time
+        :datetime
+      when :date
+        :date
+      when :boolean
+        :boolean
+      when :numeric
+        # TODO: Return type.
+        type
+      when :primary_key
+        # TODO: Return type.
+        type
+      when :binary
+        # TODO: Return type.
+        type
+      else
+        type
+      end
     end
   end
 end
