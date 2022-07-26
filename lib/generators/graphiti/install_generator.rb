@@ -41,8 +41,10 @@ module Graphiti
         RUBY
       end
 
-      inject_into_file "spec/rails_helper.rb", after: /RSpec.configure.+^end$/m do
-        "\n\nGraphitiSpecHelpers::RSpec.schema!"
+      if defined?(RSpec)
+        inject_into_file "spec/rails_helper.rb", after: /RSpec.configure.+^end$/m do
+          "\n\nGraphitiSpecHelpers::RSpec.schema!"
+        end
       end
 
       insert_into_file "config/routes.rb", after: "Rails.application.routes.draw do\n" do
