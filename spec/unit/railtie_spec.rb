@@ -1,4 +1,5 @@
 # TODO: Write proper specs
+require "rails_helper"
 
 RSpec.describe Graphiti::Rails::Railtie do
   describe "when rails is defined with logger" do
