@@ -2,6 +2,15 @@
 require "rails_helper"
 
 RSpec.describe Graphiti::Rails::Railtie do
+  before do
+    stub_const("::Rails", rails)
+    Graphiti.instance_variable_set(:@config, nil)
+  end
+
+  after do
+    Graphiti.instance_variable_set(:@config, nil)
+  end
+
   describe "when rails is defined with logger" do
     let(:rails) do
       logger = OpenStruct.new(level: 1)
@@ -10,15 +19,6 @@ RSpec.describe Graphiti::Rails::Railtie do
       end
 
       double(root: Pathname.new("/foo/bar"), logger: logger)
-    end
-
-    before do
-      stub_const("::Rails", rails)
-      Graphiti.instance_variable_set(:@config, nil)
-    end
-
-    after do
-      Graphiti.instance_variable_set(:@config, nil)
     end
 
     describe "#schema_path" do
@@ -51,11 +51,7 @@ RSpec.describe Graphiti::Rails::Railtie do
   end
 
   context "when Rails is defined without logger" do
-    before do
-      rails = double(root: Pathname.new("/foo/bar"), logger: double.as_null_object)
-      stub_const("::Rails", rails)
-      Graphiti.instance_variable_set(:@config, nil)
-    end
+    let(:rails) { stub_const("::Rails", double(root: Pathname.new("/foo/bar"), logger: nil)) }
 
     it "defaults" do
       expect(Graphiti.config.schema_path.to_s)
