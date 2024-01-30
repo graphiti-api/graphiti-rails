@@ -72,9 +72,9 @@ module Graphiti
 
       def register_parameter_parser
         if ::Rails::VERSION::MAJOR >= 5
-          ActionDispatch::Request.parameter_parsers[:jsonapi] = PARSER
+          ActionDispatch::Request.parameter_parsers[:jsonapi] ||= PARSER
         else
-          ActionDispatch::ParamsParser::DEFAULT_PARSERS[Mime[:jsonapi]] = PARSER
+          ActionDispatch::ParamsParser::DEFAULT_PARSERS[Mime[:jsonapi]] ||= PARSER
         end
       end
 
