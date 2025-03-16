@@ -26,10 +26,11 @@ Gem::Specification.new do |spec|
   spec.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md", "CHANGELOG.md"]
 
   spec.add_dependency "graphiti", "~> 1.2"
-  spec.add_dependency "rescue_registry", "~> 0.2.1"
-  spec.add_dependency "rails", ">= 5.0"
+  spec.add_dependency "rescue_registry", "~> 1.0"
+  spec.add_dependency "railties", ">= 5.0"
 
   spec.add_development_dependency "sqlite3"
+  spec.add_development_dependency "rails", ">= 5.0"
   spec.add_development_dependency "rspec-rails"
   spec.add_development_dependency "graphiti_spec_helpers", "~> 1.0"
   spec.add_development_dependency "kaminari"
