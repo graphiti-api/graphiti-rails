@@ -1,6 +1,11 @@
 ENV["RAILS_ENV"] ||= "test"
 
-require_relative "dummy/config/environment"
+require "rails/version"
+if Rails::VERSION::MAJOR < 7
+  require_relative "rails5/dummy/config/environment"
+else
+  require_relative "rails7/dummy/config/environment"
+end
 require "rspec/rails"
 require "rspec/mocks"
 require 'graphiti_spec_helpers/rspec'
@@ -12,7 +17,7 @@ module SpecHelpers
   def expect_jsonapi_error(error_name, status: 404, error: { }, detailed: false)
     expect(response).to_not be_successful
     expect(response.status).to eq(status)
-    expect(response.content_type).to eq("application/vnd.api+json")
+    expect(response.content_type).to start_with("application/vnd.api+json")
 
     meta =
       if detailed
@@ -22,24 +27,25 @@ module SpecHelpers
           )
         )
       else
-        { }
+        nil
       end
 
     json = JSON.parse(response.body)
+
+    expected_hash = { "code" => "not_found",
+      "status" => status.to_s,
+      "title" => "Not Found" }
+    expected_hash["meta"] = meta if meta
+
     expect(json["errors"]).to match([
-      a_hash_including(
-        { "code" => "not_found",
-          "status" => status.to_s,
-          "title" => "Not Found",
-          "meta" => meta }.merge(error)
-      )
+      a_hash_including(expected_hash.merge(error))
     ])
   end
 
   def expect_xml_error(detailed: false)
     expect(response).to_not be_successful
     expect(response.status).to eq(404)
-    expect(response.content_type).to eq("application/xml")
+    expect(response.content_type).to start_with("application/xml")
 
     # If we want more complex, use nokogiri
     expect(response.body).to include("<code type=\"symbol\">not_found</code>")
@@ -54,7 +60,7 @@ module SpecHelpers
   def expect_html_error(detailed: false)
     expect(response).to_not be_successful
     expect(response.status).to eq(404)
-    expect(response.content_type).to eq("text/html")
+    expect(response.content_type).to start_with("text/html")
 
     # We could make this check more robust
     if detailed
