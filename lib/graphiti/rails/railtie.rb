@@ -131,8 +131,11 @@ module Graphiti
           end
 
           route = begin
+                    if Gem::Version.new(::Rails::VERSION::STRING) >= Gem::Version.new("7.0.0")
+                      path = path.to_s
+                    end
                     ::Rails.application.routes.recognize_path(path, method: method)
-                  rescue
+                  rescue => e
                     nil
                   end
           "#{route[:controller]}_controller".classify.safe_constantize if route
