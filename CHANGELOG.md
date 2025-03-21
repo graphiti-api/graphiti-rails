@@ -1,3 +1,16 @@
+graphiti-rails changelog
+
+## [0.4.1](https://github.com/graphiti-api/graphiti-rails/compare/v0.4.0...v0.4.1) (2025-03-21)
+
+
+### Bug Fixes
+
+* `register_parameter_parser` overiding custom config ([#109](https://github.com/graphiti-api/graphiti-rails/issues/109)) ([a135bfa](https://github.com/graphiti-api/graphiti-rails/commit/a135bfa7729b921cf57563916567e272237b6b1f))
+* Add basic column type conversion. ([#83](https://github.com/graphiti-api/graphiti-rails/issues/83)) ([e5bbc92](https://github.com/graphiti-api/graphiti-rails/commit/e5bbc92335376311f02af71d0db3ddc13bdd1ad9))
+* Add condition to check RSpec availability in install generator ([#63](https://github.com/graphiti-api/graphiti-rails/issues/63)) ([13895d9](https://github.com/graphiti-api/graphiti-rails/commit/13895d98f8784f5552256840fd44caaa80c4717b))
+* rspec double was leaking across tests ([#105](https://github.com/graphiti-api/graphiti-rails/issues/105)) ([b38faf2](https://github.com/graphiti-api/graphiti-rails/commit/b38faf2a02bd9e5e91e9014ca060092d7398b47d))
+* Stringify path if Rails version > 7 ([#107](https://github.com/graphiti-api/graphiti-rails/issues/107)) ([47d356c](https://github.com/graphiti-api/graphiti-rails/commit/47d356c23c3d800e83236227a6684fc40af360af))
+
 # Changelog
 
 All notable changes to this project will be documented in this file.
