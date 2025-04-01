@@ -58,7 +58,7 @@ For more information about Graphiti context, see the [Graphiti docs][context].
 We also provide hooks for Graphiti's built-in debugger. For more information see the [Graphiti docs][debugger].
 
 ## Contributing
-We'd love to have your help improving graphiti-rails. To chat with the team and other users, join the `#rails` channel on [Slack][slack].
+We'd love to have your help improving graphiti-rails. To chat with the team and other users, join the `#development` channel on [Discord][discord].
 
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
@@ -69,4 +69,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 [debugger]: https://www.graphiti.dev/guides/concepts/debugging#debugger
 [rescue-from]: https://api.rubyonrails.org/classes/ActiveSupport/Rescuable/ClassMethods.html#method-i-rescue_from
 [show-exceptions]: https://api.rubyonrails.org/classes/ActionDispatch/ShowExceptions.html
-[slack]: https://join.slack.com/t/graphiti-api/shared_invite/enQtMjkyMTA3MDgxNTQzLWVkMDM3NTlmNTIwODY2YWFkMGNiNzUzZGMzOTY3YmNmZjBhYzIyZWZlZTk4YmI1YTI0Y2M0OTZmZGYwN2QxZjg
+[discord]: https://discord.gg/wgqkMBsSRV
