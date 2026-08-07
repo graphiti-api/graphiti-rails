@@ -1,5 +1,12 @@
 # Graphiti::Rails
 
+> ### This gem is retired
+>
+> `graphiti-rails` is part of [graphiti](https://github.com/graphiti-api/graphiti) itself as of graphiti 2.0, and is no longer developed here. Issues and pull requests live in the [graphiti repo](https://github.com/graphiti-api/graphiti/issues).
+>
+> To upgrade from Graphiti 1.x to 2.x, follow the [upgrade guide](https://graphiti.dev/upgrading).
+
+
 Graphiti::Rails provides robust Rails integration for Graphiti, following standard Rails conventions.
 
 ## Usage
