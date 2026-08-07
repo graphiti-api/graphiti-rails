@@ -1,5 +1,12 @@
 graphiti-rails changelog
 
+## [0.4.2](https://github.com/graphiti-api/graphiti-rails/compare/v0.4.1...v0.4.2) (2026-08-07)
+
+
+### Bug Fixes
+
+* mark the gem deprecated and cap graphiti explicitly, and update readme ([686f332](https://github.com/graphiti-api/graphiti-rails/commit/686f332041b250e5ca281a577a1ce1c983d07fce))
+
 ## [0.4.1](https://github.com/graphiti-api/graphiti-rails/compare/v0.4.0...v0.4.1) (2025-03-21)
 
 
